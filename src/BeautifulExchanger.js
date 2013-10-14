@@ -49,7 +49,7 @@
         this.id = issuer.issue();
         // for Rule and Entity
         this.issuer = new IDIssuer;
-        this.idKeyForRule = 'registry:' + this.id;
+        this.idKeyForRule = 'BeautifulExchanger:registry:' + this.id;
         this.rules = Object.create(null);
         this.receivers = Object.create(null);
         this.emitters = Object.create(null);
