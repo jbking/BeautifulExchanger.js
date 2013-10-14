@@ -15,7 +15,7 @@ describe("A Registry", function () {
       BeautifulExchanger.Registry.current.registerRule(exchangableRule);
     });
 
-    it("has two rules", function () {
+    it("has two rules.", function () {
       var ruleValues = _.values(BeautifulExchanger.Registry.current.rules);
       expect(ruleValues).toContain(rule);
       expect(ruleValues).toContain(exchangableRule);
@@ -32,7 +32,7 @@ describe("A Registry", function () {
         BeautifulExchanger.Registry.current.registerReceiver(receiver2, rule);
       });
 
-      it("only return exchangable pair", function () {
+      it("only return exchangable pair.", function () {
         var receiverPair = BeautifulExchanger.Registry.current.retrieveReceiversForEmitter(emitter);
         expect(receiverPair).toEqual([[receiver1, exchangableRule]]);
       });
