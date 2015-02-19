@@ -1,11 +1,3 @@
-/**
- * @module BeautifulExchanger
- * @version 0.0.1
- * @author jbking
- * @copyright (c) 2013 jbking
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- */
 ;(function(module,moduleName,global){
   // in AMD
   if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
@@ -19,15 +11,17 @@
 })((function(global, undefined) {
   return function (BeautifulProperties) {
     /**
-     * @name BeautifulExchanger
-     * @namespace
-     * @alias module:BeautifulExchanger
+     * @namespace BeautifulExchanger
+     * @version 0.0.1
+     * @author jbking
+     * @copyright (c) 2013 jbking
+     * Dual licensed under the MIT (MIT-LICENSE.txt)
+     * and GPL (GPL-LICENSE.txt) licenses.
      */
     var BeautifulExchanger = Object.create(null);
 
     /**
-     * @name Registry
-     * @namespace
+     * @namespace Registry
      * @memberOf BeautifulExchanger
      */
     BeautifulExchanger.Registry = Object.create(null);
@@ -219,8 +213,7 @@
     })(BeautifulExchanger.Registry);
 
     /**
-     * @name TranslatorBuilder
-     * @namespace
+     * @namespace TranslatorBuilder
      * @memberOf BeautifulExchanger
      */
     BeautifulExchanger.TranslatorBuilder = Object.create(null);
