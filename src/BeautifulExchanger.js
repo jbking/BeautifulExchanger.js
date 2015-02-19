@@ -1,11 +1,3 @@
-/**
- * @module BeautifulExchanger
- * @version 0.0.1
- * @author jbking
- * @copyright (c) 2013 jbking
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- */
 ;(function(module,moduleName,global){
   // in AMD
   if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
@@ -18,20 +10,57 @@
   }
 })((function(global, undefined) {
   return function (BeautifulProperties) {
+    function compareSemver(semver,operator,otherSemver) {
+      if (typeof semver === 'string') {
+        semver = semver.split('.').map(function (str) {
+          return Number(str)
+        });
+      }
+      if (typeof otherSemver === 'string') {
+        otherSemver = otherSemver.split('.').map(function (str) {
+          return Number(str)
+        });
+      }
+      "use strict";
+      switch (operator) {
+        case '==':
+        case '===':
+          return semver[0] === otherSemver[0] && semver[1] === otherSemver[1] && semver[2] === otherSemver[2];
+        case '>':
+        case '<':
+          return eval(('semver[0] OP otherSemver[0] ||'+
+          '(semver[0] === otherSemver[0] && semver[1] OP otherSemver[1]) ||'+
+          '(semver[0] === otherSemver[0] && semver[1] === otherSemver[1] && semver[2] OP otherSemver[2])').replace(/OP/g,operator));
+        case '>=':
+        case '<=':
+          return eval(('semver[0] OP otherSemver[0] ||'+
+          '(semver[0] === otherSemver[0] && semver[1] OP otherSemver[1]) ||'+
+          '(semver[0] === otherSemver[0] && semver[1] === otherSemver[1] && semver[2] OP= otherSemver[2])').replace(/OP/g,operator.replace('=','')));
+      }
+    }
+
+    if (compareSemver(BeautifulProperties.VERSION,'>=',[0,2,0])) {
+      throw new Error('BeautifulProperties 0.2.0 or above is not supported.');
+    }
     /**
-     * @name BeautifulExchanger
-     * @namespace
-     * @alias module:BeautifulExchanger
+     * @namespace BeautifulExchanger
+     * @version 0.0.2
+     * @author jbking
+     * @copyright (c) 2013 jbking
+     * Dual licensed under the MIT (MIT-LICENSE.txt)
+     * and GPL (GPL-LICENSE.txt) licenses.
      */
     var BeautifulExchanger = Object.create(null);
 
     /**
-     * @name Registry
-     * @namespace
+     * @namespace Registry
      * @memberOf BeautifulExchanger
      */
     BeautifulExchanger.Registry = Object.create(null);
     (function (mod) {
+      /**
+       * @constructor BeautifulExchanger.Registry~IDIssuer
+       */
       function IDIssuer() {
         this.c = 0;
       }
@@ -45,6 +74,9 @@
       var issuer = new IDIssuer;
 
       // For now, support only one registry. But can be multiple registries.
+      /**
+       * @constructor BeautifulExchanger.Registry~Registry
+       */
       function Registry() {
         this.id = issuer.issue();
         // for Rule and Entity
@@ -219,14 +251,19 @@
     })(BeautifulExchanger.Registry);
 
     /**
-     * @name TranslatorBuilder
-     * @namespace
+     * @namespace TranslatorBuilder
      * @memberOf BeautifulExchanger
      */
     BeautifulExchanger.TranslatorBuilder = Object.create(null);
     (function (Registry, TranslatorBuilder) {
       var destroyKey = 'app/EventTranslator/TranslatorBuilder:destroy';
 
+      /**
+       * @function create
+       * @memberOf BeautifulExchanger.TranslatorBuilder
+       * @param descriptions
+       * @returns {object}
+       */
       TranslatorBuilder.create = function TranslatorBuilder_create(descriptions) {
         var proto = Object.create(null);
         BeautifulProperties.Events.provideMethods(proto);
@@ -274,6 +311,11 @@
         return proto;
       };
 
+      /**
+       * @function destroy
+       * @memberOf BeautifulExchanger.TranslatorBuilder
+       * @param translator
+       */
       TranslatorBuilder.destroy = function TranslatorBuilder_destroy(translator) {
         translator.trigger(destroyKey);
       };
