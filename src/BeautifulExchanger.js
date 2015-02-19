@@ -26,6 +26,9 @@
      */
     BeautifulExchanger.Registry = Object.create(null);
     (function (mod) {
+      /**
+       * @constructor BeautifulExchanger.Registry~IDIssuer
+       */
       function IDIssuer() {
         this.c = 0;
       }
@@ -39,6 +42,9 @@
       var issuer = new IDIssuer;
 
       // For now, support only one registry. But can be multiple registries.
+      /**
+       * @constructor BeautifulExchanger.Registry~Registry
+       */
       function Registry() {
         this.id = issuer.issue();
         // for Rule and Entity
@@ -220,6 +226,12 @@
     (function (Registry, TranslatorBuilder) {
       var destroyKey = 'app/EventTranslator/TranslatorBuilder:destroy';
 
+      /**
+       * @function create
+       * @memberOf BeautifulExchanger.TranslatorBuilder
+       * @param descriptions
+       * @returns {object}
+       */
       TranslatorBuilder.create = function TranslatorBuilder_create(descriptions) {
         var proto = Object.create(null);
         BeautifulProperties.Events.provideMethods(proto);
@@ -267,6 +279,11 @@
         return proto;
       };
 
+      /**
+       * @function destroy
+       * @memberOf BeautifulExchanger.TranslatorBuilder
+       * @param translator
+       */
       TranslatorBuilder.destroy = function TranslatorBuilder_destroy(translator) {
         translator.trigger(destroyKey);
       };
