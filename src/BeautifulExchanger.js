@@ -44,7 +44,7 @@
     }
     /**
      * @namespace BeautifulExchanger
-     * @version 0.0.1
+     * @version 0.0.2
      * @author jbking
      * @copyright (c) 2013 jbking
      * Dual licensed under the MIT (MIT-LICENSE.txt)
