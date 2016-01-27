@@ -39,12 +39,12 @@
       }
     }
 
-    if (compareSemver(BeautifulProperties.VERSION,'>=',[0,2,0])) {
-      throw new Error('BeautifulProperties 0.2.0 or above is not supported.');
+    if (compareSemver(BeautifulProperties.VERSION,'<',[0,2,0])) {
+      throw new Error('BeautifulProperties 0.2.0 or above is required by BeautifulExchanger 0.2.0');
     }
     /**
      * @namespace BeautifulExchanger
-     * @version 0.0.2
+     * @version 0.2.0
      * @author jbking
      * @copyright (c) 2013 jbking
      * Dual licensed under the MIT (MIT-LICENSE.txt)
@@ -270,7 +270,7 @@
         BeautifulProperties.Hookable.define(proto, 'emitter');
         BeautifulProperties.Observable.define(proto, 'emitter');
 
-        proto.on('change:emitter', function (_ev, emitter, previous) {
+        proto.on(['change:emitter','init:emitter'], function (_ev, emitter, previous) {
           // When the emitter is set. It means their ancestor is replaced in past.
           // So, free that.
           if (previous) {
